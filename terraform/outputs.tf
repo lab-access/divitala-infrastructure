@@ -14,8 +14,8 @@ output "naming_convention" {
 output "environment_config" {
   description = "Current environment configuration"
   value = {
-    environment   = local.environment
-    location      = local.location
+    environment    = local.environment
+    location       = local.location
     location_short = local.location_short
   }
 }

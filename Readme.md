@@ -13,6 +13,35 @@ This repository contains all infrastructure-as-code for Divitala's migration to 
 - Monitoring (Log Analytics, Application Insights)
 - Cost Governance & Compliance
 
+## Network Diagram
+┌─────────────────────────────────────────┐
+│   Hub VNet (10.0.0.0/16)                │
+│                                         │
+│  ┌─────────────┐  ┌─────────────────┐  │
+│  │ Gateway     │  │ Firewall        │  │
+│  │ Subnet      │  │ Subnet          │  │
+│  │ 10.0.0.0/24 │  │ 10.0.1.0/26     │  │
+│  └─────────────┘  └─────────────────┘  │
+│                                         │
+│  ┌─────────────┐  ┌─────────────────┐  │
+│  │ Bastion     │  │ Management      │  │
+│  │ Subnet      │  │ Subnet          │  │
+│  │ 10.0.2.0/26 │  │ 10.0.10.0/24    │  │
+│  └─────────────┘  └─────────────────┘  │
+│       ↓                                 │
+│       └─ SSH/RDP for admin access       │
+│                                         │
+│  ┌─────────────┐  ┌─────────────────┐  │
+│  │ Data        │  │ App             │  │
+│  │ Subnet      │  │ Subnet          │  │
+│  │ 10.1.10/24  │  │ 10.1.20/24      │  │
+│  └─────────────┘  └─────────────────┘  │
+│   (DB, Cache)     (Containers, VMs)    │
+│                                         │
+└─────────────────────────────────────────┘
+
+Future: Spoke VNets will peer to Hub
+
 ## Quick Start
 
 ### Prerequisites

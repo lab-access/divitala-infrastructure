@@ -53,6 +53,14 @@ variable "location" {
   }
 }
 
+variable "subnets" {
+  description = "Subnets map passed to networking module"
+  type = map(object({
+    address_prefix = string
+  }))
+}
+
+
 variable "cost_center" {
   description = "Cost center code for billing"
   type        = string
